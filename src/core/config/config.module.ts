@@ -1,16 +1,16 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { envValidationSchema } from './env.validation';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { envValidationSchema } from "./env.validation";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       validationSchema: envValidationSchema,
-      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
+      envFilePath: [`.env.${process.env.NODE_ENV}`, ".env"],
       cache: true,
-      expandVariables: true,
-    }),
+      expandVariables: true
+    })
   ],
-  exports: [ConfigModule],
+  exports: [ConfigModule]
 })
 export class AppConfigModule {}

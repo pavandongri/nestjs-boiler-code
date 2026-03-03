@@ -1,21 +1,21 @@
-import { Injectable, LoggerService } from '@nestjs/common';
-import pino, { Logger } from 'pino';
+import { Injectable, LoggerService } from "@nestjs/common";
+import pino, { Logger } from "pino";
 
 @Injectable()
 export class AppLogger implements LoggerService {
   private logger: Logger;
 
   constructor() {
-    const isProd = process.env.NODE_ENV === 'production';
+    const isProd = process.env.NODE_ENV === "production";
 
     this.logger = pino({
-      level: isProd ? 'info' : 'debug',
+      level: isProd ? "info" : "debug",
       transport: !isProd
         ? {
-            target: 'pino-pretty',
-            options: { colorize: true },
+            target: "pino-pretty",
+            options: { colorize: true }
           }
-        : undefined,
+        : undefined
     });
   }
 
