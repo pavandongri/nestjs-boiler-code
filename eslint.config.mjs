@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**", "*.config.js", "*.config.mjs"]
+    ignores: ["dist/**", "node_modules/**", "logs/**", "coverage/**", "*.config.js", "*.config.mjs"]
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
@@ -31,6 +31,7 @@ export default tseslint.config(
       "@typescript-eslint/no-unsafe-argument": "warn",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unsafe-member-access": "warn",
       "prettier/prettier": ["error", { endOfLine: "lf" }]
     }
   }
