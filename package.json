@@ -87,5 +87,8 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "engines": {
+    "node": ">=22 <23"
   }
 }
