@@ -16,8 +16,6 @@ export class AppService {
     this.logger.log(`DB_URL: ${DB_URL}`);
     this.logger.log(`BASE_URL: ${BASE_URL}`);
 
-    const a = 2;
-
     return { message: "Hello World!" };
   }
 }
