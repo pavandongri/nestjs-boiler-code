@@ -10,12 +10,6 @@ export class AppService {
   ) {}
 
   getHello(): object {
-    const DB_URL = this.config.get("DB_URL");
-    const BASE_URL = this.config.get("BASE_URL");
-
-    this.logger.log(`DB_URL: ${DB_URL}`);
-    this.logger.log(`BASE_URL: ${BASE_URL}`);
-
     return { message: "Hello World!" };
   }
 }
