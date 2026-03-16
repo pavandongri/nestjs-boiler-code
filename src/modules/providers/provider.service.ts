@@ -13,7 +13,7 @@ export class ProviderService {
   ) {}
 
   async findAll() {
-    this.logger.log("inside providers");
+    this.logger.log("Fetching providers..");
 
     // throw new ApiError("bad_request", "userid is required");
 
