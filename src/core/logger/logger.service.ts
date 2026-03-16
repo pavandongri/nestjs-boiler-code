@@ -29,36 +29,49 @@ export class AppLogger implements LoggerService {
             mkdir: true
           }
         },
-        ...(!isProd
-          ? [
+
+        ...(isProd
+          ? []
+          : [
               {
                 target: "pino-pretty",
                 level: "debug",
                 options: {
                   colorize: true,
-                  ignore: "pid,hostname",
-                  translateTime: "HH:MM:ss"
+                  ignore: "pid,hostname"
                 }
               }
-            ]
-          : [])
+            ])
       ]
     });
 
     this.logger = pino(
       {
-        level: isProd ? "info" : "debug"
+        level: isProd ? "info" : "debug",
+        base: undefined,
+        timestamp: () => {
+          const time = new Date().toLocaleTimeString("en-GB", {
+            hour12: false
+          });
+          return `,"time":"${time}"`;
+        }
       },
       transport
     );
   }
 
   log(message: any, context?: string) {
+    const ignoredContexts = ["RouterExplorer", "RoutesResolver", "NestApplication"];
+
+    if (context && ignoredContexts.includes(context)) {
+      return;
+    }
+
     this.logger.info({ context }, message);
   }
 
   error(message: any, trace?: string, context?: string) {
-    this.logger.error({ trace, context }, message);
+    this.logger.error({ context, trace }, message);
   }
 
   warn(message: any, context?: string) {
