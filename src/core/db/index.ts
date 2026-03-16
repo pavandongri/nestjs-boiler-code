@@ -1,3 +1,13 @@
-import "dotenv/config";
 import { drizzle } from "drizzle-orm/node-postgres";
-export const db = drizzle(process.env.DATABASE_URL!);
+import { Pool, type PoolConfig } from "pg";
+import * as schema from "./schema";
+
+const poolConfig: PoolConfig = {
+  connectionString: process.env.DATABASE_URL
+};
+
+const pool = new Pool(poolConfig);
+
+export const db = drizzle(pool, { schema });
+
+export type DB = typeof db;

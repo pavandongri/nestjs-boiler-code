@@ -1,10 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import type { DB } from "../../core/db";
 import { PayrollProviders } from "../../core/db/schema";
 
 @Injectable()
 export class ProviderService {
-  constructor(@Inject("DRIZZLE_DB") private readonly db: any) {}
+  constructor(@Inject("DRIZZLE_DB") private readonly db: DB) {}
 
   async findAll() {
     return await this.db.select().from(PayrollProviders);
@@ -12,13 +13,11 @@ export class ProviderService {
 
   async findById(id: string) {
     const result = await this.db.select().from(PayrollProviders).where(eq(PayrollProviders.id, id));
-
     return result[0];
   }
 
   async create(data: { name: string; shortId: string; logoUrl?: string; key?: string }) {
     const result = await this.db.insert(PayrollProviders).values(data).returning();
-
     return result[0];
   }
 

@@ -1,5 +1,5 @@
 {
-  "id": "baa78e17-ee49-45c1-a31a-df0cc257f785",
+  "id": "69030ed4-9eec-4a29-84bd-ccd560de137b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -67,16 +67,12 @@
         "PayrollProviders_name_unique": {
           "name": "PayrollProviders_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         },
         "PayrollProviders_shortId_unique": {
           "name": "PayrollProviders_shortId_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "shortId"
-          ]
+          "columns": ["shortId"]
         }
       },
       "policies": {},
