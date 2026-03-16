@@ -1,10 +1,10 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from "@nestjs/common";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { APP_CONSTANTS } from "src/constants/app.contants";
+import { APP_CONSTANTS } from "src/common/constants/app.contants";
 import { AppLogger } from "src/core/logger/logger.service";
 
-import { ApiError } from "src/utils/api-error";
-import { ErrorApiResponse } from "src/utils/api-response";
+import { ApiError } from "src/common/errors/api-error";
+import { ErrorApiResponse } from "src/common/responses/api-response";
 
 const isProd = process.env.NODE_ENV === APP_CONSTANTS.PRODUCTION;
 

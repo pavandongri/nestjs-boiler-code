@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { AppLogger } from "../logger/logger.service";
+import { AppLogger } from "../../core/logger/logger.service";
 
 @Injectable()
 export class RequestLoggerInterceptor implements NestInterceptor {
