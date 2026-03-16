@@ -1,4 +1,4 @@
-import { ERROR_STATUS_MAP, ErrorCode } from "src/constants/error.constants";
+import { ERROR_STATUS_MAP, ErrorCode } from "src/common/constants/error.constants";
 
 export class ApiError extends Error {
   statusCode: number;

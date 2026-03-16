@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { SuccessApiResponse } from "src/common/responses/api-response";
 import { AppLogger } from "src/core/logger/logger.service";
-import { SuccessApiResponse } from "src/utils/api-response";
 import type { DB } from "../../core/db";
 import { PayrollProviders } from "../../core/db/schema";
 
