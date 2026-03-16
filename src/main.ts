@@ -2,6 +2,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
+import { APP_CONSTANTS } from "./constants/app.contants";
 import { AppLogger } from "./core/logger/logger.service";
 
 async function main() {
@@ -14,13 +15,12 @@ async function main() {
 
   const config = app.get(ConfigService);
   const port = config.get<number>("PORT") ?? 3000;
-  const host = config.get<string>("HOST") ?? "localhost";
 
-  app.setGlobalPrefix("api/v1");
+  app.setGlobalPrefix(APP_CONSTANTS.API_PREFIX);
 
-  await app.listen(port, host);
+  await app.listen(port);
 
-  logger.log(`🚀 Server running on http://${host}:${port}`);
+  logger.log(`🚀 Server running on http://localhost:${port}`);
 }
 
 main();

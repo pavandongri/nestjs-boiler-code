@@ -8,7 +8,7 @@ export class AppLogger implements LoggerService {
   private logger: Logger;
 
   constructor() {
-    const isProd = process.env.NODE_ENV === "production";
+    const enableConsoleLogs = process.env.ENABLE_CONSOLE_LOGS === "true";
 
     const logDir = path.join(process.cwd(), "logs");
 
@@ -30,9 +30,8 @@ export class AppLogger implements LoggerService {
           }
         },
 
-        ...(isProd
-          ? []
-          : [
+        ...(enableConsoleLogs
+          ? [
               {
                 target: "pino-pretty",
                 level: "debug",
@@ -41,13 +40,14 @@ export class AppLogger implements LoggerService {
                   ignore: "pid,hostname"
                 }
               }
-            ])
+            ]
+          : [])
       ]
     });
 
     this.logger = pino(
       {
-        level: isProd ? "info" : "debug",
+        level: "debug",
         base: undefined,
         timestamp: () => {
           const time = new Date().toLocaleTimeString("en-GB", {
