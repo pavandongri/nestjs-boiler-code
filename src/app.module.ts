@@ -3,7 +3,7 @@ import { APP_FILTER } from "@nestjs/core";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { CoreModule } from "./core/core.module";
-import { GlobalExceptionFilter } from "./src/filters/global-exception.filter";
+import { GlobalExceptionFilter } from "./core/filters/global-exception.filter";
 
 @Module({
   imports: [CoreModule],
