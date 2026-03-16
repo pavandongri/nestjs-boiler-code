@@ -1,14 +1,28 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { eq } from "drizzle-orm";
+import { AppLogger } from "src/core/logger/logger.service";
+import { SuccessApiResponse } from "src/utils/api-response";
 import type { DB } from "../../core/db";
 import { PayrollProviders } from "../../core/db/schema";
 
 @Injectable()
 export class ProviderService {
-  constructor(@Inject("DRIZZLE_DB") private readonly db: DB) {}
+  constructor(
+    @Inject("DRIZZLE_DB") private readonly db: DB,
+    private readonly logger: AppLogger
+  ) {}
 
   async findAll() {
-    return await this.db.select().from(PayrollProviders);
+    this.logger.log("Fetching providers..");
+
+    // throw new ApiError("bad_request", "userid is required");
+
+    // const user: any = null;
+    // console.log({ name: user.name });
+
+    const data = await this.db.select().from(PayrollProviders);
+
+    return SuccessApiResponse("Fetched providers list", data);
   }
 
   async findById(id: string) {

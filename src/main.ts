@@ -2,6 +2,8 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
+import { APP_CONSTANTS } from "./constants/app.contants";
+import { db } from "./core/db";
 import { AppLogger } from "./core/logger/logger.service";
 
 async function main() {
@@ -14,13 +16,20 @@ async function main() {
 
   const config = app.get(ConfigService);
   const port = config.get<number>("PORT") ?? 3000;
-  const host = config.get<string>("HOST") ?? "localhost";
 
-  app.setGlobalPrefix("api/v1");
+  app.setGlobalPrefix(APP_CONSTANTS.API_PREFIX);
 
-  await app.listen(port, host);
+  try {
+    await db.execute("SELECT 1");
+    logger.log("✅ Database connected successfully");
+  } catch (err) {
+    logger.error("❌ Database connection failed", err);
+    process.exit(1);
+  }
 
-  logger.log(`🚀 Server running on http://${host}:${port}`);
+  await app.listen(port);
+
+  logger.log(`🚀 Server running on http://localhost:${port}`);
 }
 
 main();
